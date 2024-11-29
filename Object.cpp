@@ -1151,12 +1151,16 @@ CBullet::CBullet(ID3D12Device* pd3dDevice, ID3D12GraphicsCommandList* pd3dComman
 
 	CTexture* pTexture = new CTexture(1, RESOURCE_TEXTURE2D, 0, 1);
 	pTexture->LoadTextureFromDDSFile(pd3dDevice, pd3dCommandList, L"Image/Brick02.dds", RESOURCE_TEXTURE2D, 0);
+	CScene::CreateShaderResourceViews(pd3dDevice, pTexture, 0, 5);
+
+	//UINT ncbElementBytes = ((sizeof(CB_GAMEOBJECT_INFO) + 255) & ~255); //256ÀÇ ¹è¼ö
 
 	CTexturedShader* pTexturedShader = new CTexturedShader();
 	pTexturedShader->CreateShader(pd3dDevice, pd3dCommandList, pd3dGraphicsRootSignature);
 	pTexturedShader->CreateShaderVariables(pd3dDevice, pd3dCommandList);
 
-	CScene::CreateShaderResourceViews(pd3dDevice, pTexture, 0, 5);
+	//D3D12_GPU_DESCRIPTOR_HANDLE d3dCbvGPUDescriptorHandle = CScene::CreateConstantBufferView(pd3dDevice, m_pd3dcbGameObject, ncbElementBytes);
+	//SetCbvGPUDescriptorHandle(d3dCbvGPUDescriptorHandle);
 
 	CMaterial* pMaterial = new CMaterial();
 	pMaterial->SetTexture(pTexture);

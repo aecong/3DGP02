@@ -534,10 +534,12 @@ void CStartScene::BuildObjects(ID3D12Device* pd3dDevice, ID3D12GraphicsCommandLi
 	m_pd3dGraphicsRootSignature = CreateGraphicsRootSignature(pd3dDevice);
 
 	m_pDescriptorHeap = new CDescriptorHeap();
-	CreateCbvSrvDescriptorHeaps(pd3dDevice, 0, 8 + 50); // Texture(3 + 1), Player, Bullet
+	CreateCbvSrvDescriptorHeaps(pd3dDevice, 1 + 1 + 1, 33 + 1 + 1); // Texture(3 + 1), Player, Bullet
 
 	m_nShaders = 2;
 	m_ppShaders = new CShader * [m_nShaders];
+
+	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 
 	CTextureToScreenShader* pTextureToScreenShader = new CTextureToScreenShader(3);
 	pTextureToScreenShader->CreateShader(pd3dDevice, pd3dCommandList, m_pd3dGraphicsRootSignature);
@@ -576,7 +578,6 @@ void CStartScene::BuildObjects(ID3D12Device* pd3dDevice, ID3D12GraphicsCommandLi
 
 	m_ppShaders[1] = pTextureToScreenShader1;
 
-	CreateShaderVariables(pd3dDevice, pd3dCommandList);
 }
 
 void CStartScene::ReleaseObjects()
@@ -841,7 +842,7 @@ void CMenuScene::BuildObjects(ID3D12Device* pd3dDevice, ID3D12GraphicsCommandLis
 	 m_pd3dGraphicsRootSignature = CreateGraphicsRootSignature(pd3dDevice);
 
 	 m_pDescriptorHeap = new CDescriptorHeap();
-	CreateCbvSrvDescriptorHeaps(pd3dDevice, 0, 2 + 50); // Texture(3 + 1) 
+	CreateCbvSrvDescriptorHeaps(pd3dDevice, 1 + 1 + 1, 34); // Texture(3 + 1) 
 
 	m_nShaders = 1;
 	m_ppShaders = new CShader * [m_nShaders];

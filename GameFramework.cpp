@@ -473,6 +473,9 @@ void CGameFramework::BuildObjects()
 	m_pPlayer = m_pScene->GetPlayer();
 	m_pCamera = m_pPlayer->GetCamera();
 
+	D3D12_GPU_DESCRIPTOR_HANDLE d3dCbvGPUDescriptorHandle = m_pScene->CreateConstantBufferView(m_pd3dDevice, m_pPlayer->m_pd3dcbPlayer, ((sizeof(CB_PLAYER_INFO) + 255) & ~255));
+	m_pPlayer->SetCbvGPUDescriptorHandle(d3dCbvGPUDescriptorHandle);
+
 	CreateShaderVariables();
 
 	m_pd3dCommandList->Close();

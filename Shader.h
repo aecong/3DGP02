@@ -7,7 +7,7 @@
 #include "Object.h"
 #include "Camera.h"
 
-#define BULLETS					15
+#define BULLETS					30
 
 class CScene;
 
